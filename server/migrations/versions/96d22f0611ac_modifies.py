@@ -1,8 +1,8 @@
-"""empty message
+"""modifies
 
-Revision ID: faa482c1e292
+Revision ID: 96d22f0611ac
 Revises: 
-Create Date: 2023-11-04 17:22:44.672769
+Create Date: 2024-07-02 18:44:46.860765
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'faa482c1e292'
+revision = '96d22f0611ac'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -21,7 +21,7 @@ def upgrade():
     op.create_table('authors',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(), nullable=False),
-    sa.Column('phone_number', sa.String(), nullable=True),
+    sa.Column('phone_number', sa.String(length=10), nullable=False),
     sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
@@ -30,9 +30,9 @@ def upgrade():
     op.create_table('posts',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(), nullable=False),
-    sa.Column('content', sa.String(), nullable=True),
+    sa.Column('content', sa.String(), nullable=False),
     sa.Column('category', sa.String(), nullable=True),
-    sa.Column('summary', sa.String(), nullable=True),
+    sa.Column('summary', sa.String(length=250), nullable=False),
     sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id')
